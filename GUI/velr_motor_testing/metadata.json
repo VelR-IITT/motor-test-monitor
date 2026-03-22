@@ -1,0 +1,5 @@
+{
+  "name": "Static Fire Monitor",
+  "description": "A high-fidelity solid rocket motor static fire control interface for IIT Tirupati Rocketry Club. Features draggable sensor mapping, real-time 10-channel thermal monitoring, and data logging.",
+  "requestFramePermissions": []
+}

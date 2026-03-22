@@ -1,0 +1,6 @@
+@echo off
+echo Starting frontend...
+start cmd /k "npm run dev"
+
+echo Starting backend...
+start cmd /k "python server.py"
