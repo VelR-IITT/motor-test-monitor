@@ -21,7 +21,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # ==================== CONFIGURATION ====================
 
 # ESP Telnet Configuration (UPDATED from second code)
-ESP_HOST = "192.168.137.71"  # ESP's IP - UPDATED
+ESP_HOST = "192.168.137.68"  # ESP's IP - UPDATED
 ESP_PORT = 2323               # Standard Telnet port
 TELNET_TIMEOUT = 5.0        # Connection timeout in seconds
 RECONNECT_DELAY = 3.0       # Seconds to wait before reconnecting
