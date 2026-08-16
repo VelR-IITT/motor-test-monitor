@@ -1,0 +1,63 @@
+===================================================================
+       JEELABS ESP-LINK FLASHING MANUAL (UPDATED FOR 1MB CHIP)
+===================================================================
+
+1. HARDWARE WIRING (FLASH MODE)
+-------------------------------------------------------------------
+To allow the chip to accept new firmware, wire it exactly like this.
+
+
+   ESP8266 Pin      USB Adapter Pin
+   -----------      ---------------
+   VCC (3.3V)   ->  3.3V  (DO NOT USE 5V)
+   GND          ->  GND
+   TX           ->  RX
+   RX           ->  TX
+   CH_PD (EN)   ->  3.3V
+   GPIO0        ->  GND   <-- REQUIRED FOR FLASHING MODE
+
+2. SOFTWARE PRE-REQUISITES
+-------------------------------------------------------------------
+Open Command Prompt (cmd) and ensure esptool is installed:
+
+   pip install esptool
+
+3. PREPARATION
+-------------------------------------------------------------------
+A. Open Command Prompt.
+B. Navigate to your folder:
+   cd C:\Users\gvsra\Downloads\esp-link-v2.2.3\esp-link-v2.2.3
+
+C. Connect your USB Adapter to the PC.
+
+4. STEP 1: WIPE THE CHIP
+-------------------------------------------------------------------
+This removes old data to ensure a clean install. 
+Replace COM6 with your actual port.
+
+   python -m esptool --port COM6 erase_flash
+
+* Troubleshooting: If it fails to connect, unplug the USB, hold 
+  GPIO0 to GND, and plug it back in.
+
+5. STEP 2: FLASH THE FIRMWARE (1MB CONFIGURATION)
+-------------------------------------------------------------------
+Run this command. It is configured for your 1MB chip size and the 
+specific file names in your folder.
+
+   python -m esptool --port COM6 --baud 460800 write_flash -fm dio -fs 1MB 0x00000 boot_v1.5.bin 0x01000 user1.bin 0xFE000 blank.bin
+
+* Breakdown of this command:
+  -fs 1MB    : Sets Flash Size to 1 Megabyte.
+  0xFE000    : The correct address for settings on a 1MB chip.
+  boot_v1.5.bin : The specific bootloader version you have.
+
+6. FINAL STEP: BOOTING
+-------------------------------------------------------------------
+1. Unplug the USB adapter.
+2. DISCONNECT GPIO0 FROM GND (Crucial!).
+3. Plug the USB adapter back in.
+4. Wait 30 seconds.
+5. Connect to the new Wi-Fi network (likely named "ESP_XXXXXX").
+
+===================================================================
